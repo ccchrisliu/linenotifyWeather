@@ -87,7 +87,7 @@ def sendToLine(tmp):
     
 
 # 監聽所有來自 /callback 的 Post Request
-@app.route("/getweather", methods=['POST'])
+@app.route("/getweather", methods=['GET'])
 def callback():
     # # get X-Line-Signature header value
     # signature = request.headers['X-Line-Signature']
