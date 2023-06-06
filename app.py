@@ -1,6 +1,7 @@
 import requests
 import json
 from flask import Flask, request, abort
+from datetime import datetime, timedelta
 
 # from linebot import (
 #     LineBotApi, WebhookHandler
@@ -87,7 +88,21 @@ def getData():
             wea = weather[0]["description"]
             max = main["temp_max"]
             min = main["temp_min"]
-            temp += f"時間:{dt_txt} 天氣:{wea} 降雨:{popint}% 最高溫:{max} 最低溫:{min} \n"
+
+            if next_day_string == "":
+                date_time = datetime.strptime(dt_txt, "%Y-%m-%d %H:%M:%S")
+                next_day = date_time + timedelta(days=1)
+                # 設定時間為 "21:00:00"
+                next_day = next_day.replace(hour=21, minute=0, second=0)
+                # 將結果轉換回字串
+                next_day_string = next_day.strftime("%Y-%m-%d %H:%M:%S")     
+            dtnow = datetime.strptime(dt_txt, "%Y-%m-%d %H:%M:%S")
+            dtdate = dtnow.strftime("%m/%d %H點")     
+            temp += f"{dtdate} 天氣:{wea} 降雨:{popint}% 最高溫:{max} 最低溫:{min} \n"
+
+            if next_day_string == dt_txt:
+                break
+
         return temp
     else:
         print("Can't get data!")
