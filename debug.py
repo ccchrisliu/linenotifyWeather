@@ -30,7 +30,7 @@ if response.status_code == 200:
         popint = round(float(pop) *100, 2)
         rain = {}
         if "rain" in item:
-            rain = item  ["rain"]             
+            rain = item  ["rain"]                     
         sys = item["sys"]
         dt_txt = item["dt_txt"]
         
@@ -59,7 +59,12 @@ if response.status_code == 200:
             next_day_string = next_day.strftime("%Y-%m-%d %H:%M:%S")     
         dtnow = datetime.strptime(dt_txt, "%Y-%m-%d %H:%M:%S")
         dtdate = dtnow.strftime("%m/%d %H點")     
-        temp += f"{dtdate} 天氣:{wea} 降雨:{popint}% 最高溫:{max} 最低溫:{min} \n"
+        # temp += f"{dtdate} 天氣:{wea} 降雨:{popint}% 最高溫:{max} 最低溫:{min} \n"
+        if not rain:
+            temp += f"{dtdate} 天氣:{wea} -----------\n"
+        else:
+            temp += f"{dtdate} 天氣:{wea} 降雨:{popint}%\n"
+
 
         if next_day_string == dt_txt:
             break
