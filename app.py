@@ -70,7 +70,9 @@ def getData():
             visibility = item["visibility"]
             pop = item["pop"]
             popint = float(pop) *100
-            rain = item["rain"]
+            rain = {}
+            if "rain" in item:
+                rain = item  ["rain"]       
             sys = item["sys"]
             dt_txt = item["dt_txt"]
             
