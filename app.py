@@ -103,9 +103,9 @@ def getData():
             dtdate = dtnow.strftime("%m/%d %H點")     
             # temp += f"{dtdate} 天氣:{wea} 降雨:{popint}% 最高溫:{max} 最低溫:{min} \n"
             if not rain:
-                temp += f"{dtdate} 天氣:{wea} -----------\n"
+                temp += f"{dtdate} <{wea}> -----------\n"
             else:
-                temp += f"{dtdate} 天氣:{wea} 降雨:{popint}%\n"
+                temp += f"{dtdate} <{wea}> 降雨:{popint}%\n"
 
             if next_day_string == dt_txt:
                 break
