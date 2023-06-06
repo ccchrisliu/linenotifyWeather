@@ -58,7 +58,8 @@ def getData():
         cnt = data["cnt"]
         list_data = data["list"]
         city = data["city"]
-
+        temp = ""
+        next_day_string = ""
         # 迭代取出 list_data 中的每個資料
         for item in list_data:
             dt = item["dt"]
