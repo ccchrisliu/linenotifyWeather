@@ -44,34 +44,50 @@ def getData():
         "locationName": "%E8%87%BA%E5%8C%97%E5%B8%82",
     }
 
-    response = requests.get(f"https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization={apiKey}&format=JSON&locationName=%E8%87%BA%E5%8C%97%E5%B8%82")#requests.get(url, params=params)
+    response = requests.get(f"https://api.openweathermap.org/data/2.5/forecast?id=7280290&units=metric&appid={apiKey}&lang=zh_tw")
     print(response.status_code)
 
     if response.status_code == 200:
         # print(response.text)
         data = json.loads(response.text)
 
-        location = data["records"]["location"][0]["locationName"]
+        # 存取 JSON 資料
+        cod = data["cod"]
+        message = data["message"]
+        cnt = data["cnt"]
+        list_data = data["list"]
+        city = data["city"]
 
-        weather_elements = data["records"]["location"][0]["weatherElement"]
-        start_time = weather_elements[0]["time"][0]["startTime"]
-        end_time = weather_elements[0]["time"][0]["endTime"]
-        weather_state = weather_elements[0]["time"][0]["parameter"]["parameterName"]
-        rain_prob = weather_elements[1]["time"][0]["parameter"]["parameterName"]
-        min_tem = weather_elements[2]["time"][0]["parameter"]["parameterName"]
-        comfort = weather_elements[3]["time"][0]["parameter"]["parameterName"]
-        max_tem = weather_elements[4]["time"][0]["parameter"]["parameterName"]
-
-        print(location)
-        print(start_time)
-        print(end_time)
-        print(weather_state)
-        print(rain_prob)
-        print(min_tem)
-        print(comfort)
-        print(max_tem)
-
-        temp = f"{location} \n當前氣溫 {comfort} \n體感溫度 {weather_state}\n最高溫 {min_tem}\n最低溫 {min_tem}"
+        # 迭代取出 list_data 中的每個資料
+        for item in list_data:
+            dt = item["dt"]
+            main = item["main"]
+            weather = item["weather"]
+            clouds = item["clouds"]
+            wind = item["wind"]
+            visibility = item["visibility"]
+            pop = item["pop"]
+            popint = float(pop) *100
+            rain = item["rain"]
+            sys = item["sys"]
+            dt_txt = item["dt_txt"]
+            
+            # 輸出結果
+            # print("Date/Time:", dt_txt)
+            # print("DT:", dt)
+            # print("Main:", main)
+            # print("Weather:", weather)
+            # print("Clouds:", clouds)
+            # print("Wind:", wind)
+            # print("Visibility:", visibility)
+            # print("Pop:", pop)
+            # print("Rain:", rain)
+            # print("Sys:", sys)
+            # print("")
+            wea = weather[0]["description"]
+            max = main["temp_max"]
+            min = main["temp_min"]
+            temp += f"時間:{dt_txt} 天氣:{wea} 降雨:{popint}% 最高溫:{max} 最低溫:{min} \n"
         return temp
     else:
         print("Can't get data!")
