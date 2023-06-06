@@ -110,7 +110,7 @@ def getData():
             if next_day_string == dt_txt:
                 break
 
-        return temp
+        return "\n"+temp
     else:
         print("Can't get data!")
         return "Can't get data!"
