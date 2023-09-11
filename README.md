@@ -3,6 +3,8 @@
 連結：<[https://openweathermap.org/]><br/>
 取得氣象預報<br/>
 再把寫好的python呼叫架在render上 <[https://dashboard.render.com/]><br/>
+呼叫網址:https://lineweathernotify.onrender.com/getweather
+source code是呼叫app.py
 再透過google scheduler<[https://console.cloud.google.com/cloudscheduler]>
 去跑排成呼叫<br/>
 每天早上7:00在丟出今天到明天的降雨資料<br/>
