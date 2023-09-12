@@ -6,6 +6,7 @@
 呼叫網址:https://lineweathernotify.onrender.com/getweather
 source code是呼叫app.py
 再透過google scheduler<[https://console.cloud.google.com/cloudscheduler]>
+改用這個去跑排程https://console.cron-job.org/
 去跑排成呼叫<br/>
 每天早上7:00在丟出今天到明天的降雨資料<br/>
 
